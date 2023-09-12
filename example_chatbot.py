@@ -186,7 +186,7 @@ while True:
 
     print(res_line, end = "")
     sys.stdout.flush()
-
+    ape = ""
     generator.begin_beam_search()
 
     for i in range(max_response_tokens):
@@ -216,7 +216,9 @@ while True:
         skip_space = res_line.endswith("\n") and new_text.startswith(" ")  # Bit prettier console output
         res_line += new_text
         if skip_space: new_text = new_text[1:]
-
+        
+        new_text += ape
+        yield new_text
         print(new_text, end="")  # (character streaming output is here)
         sys.stdout.flush()
 
